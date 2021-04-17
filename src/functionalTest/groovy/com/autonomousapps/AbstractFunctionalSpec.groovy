@@ -27,7 +27,11 @@ abstract class AbstractFunctionalSpec extends Specification {
   }
 
   protected static void clean(File rootDir) {
-    FileUtils.deleteDirectory(rootDir)
+    try {
+      FileUtils.deleteDirectory(rootDir)
+    } catch (FileNotFoundException e) {
+      println("FileNotFoundException: ${e.localizedMessage}")
+    }
   }
 
   List<Advice> actualAdvice(String projectName = null) {
